@@ -17,5 +17,10 @@ namespace CRMSystem.Controllers
         {
             return View();
         }
+
+        public IResult SendOrder()
+        {
+            return Results.Ok();
+        }
     }
 }

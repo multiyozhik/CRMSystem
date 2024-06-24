@@ -1,8 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Home/Index page</a>.</p>
+    <form action="/Home/SendOrder" method="post">
+        <div class="mb-3">
+            <label for="name">Имя: </label>
+            <input type="text" name="name" id="name" required />
+        </div>
+        <div class="mb-3">
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" required />
+        </div>
+        <div class="mb-3">
+            <label for="message">Текст сообщения: </label>
+            <input type="text" name="message" id="message" required />
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Отправить" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
