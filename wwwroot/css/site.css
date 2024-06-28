@@ -18,5 +18,105 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.header{
+  width: 100%;
+  height: auto;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  list-style-type: none;
+}
+
+.nav a {
+  width: auto;
+  display: block;
+  margin-top: 30px;
+  padding-right: 30px;
+  color: white;
+  text-decoration: none;
+}
+
+.slogan{
+  padding: 30px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.footer {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 15px;
+  background-color: dodgerblue;
+}
+
+.order-form{
+  display: grid;
+  grid-template-columns: 80px 1fr 50px 1fr 80px;
+  grid-template-rows: 4em 10px 6em 10px 3em;
+}
+
+.greeting-for-form{
+  text-align: left;
+  font-weight: bold;
+  color: darkslategrey;
+  margin: 30px;
+  margin-left: 80px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input1-wrapper {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.input2-wrapper {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+
+.comment-wrapper {
+  grid-column: 2 / 5;
+  grid-row: 3 / 4;
+  height: 100%;
+}
+
+.btn-wrapper {
+  grid-column: 4 / 5;
+  grid-row: 5 / 6;
+  align-items: center;
+}
+
+.label{
+  color:gray;
+  font-size: small;
+}
+
+.input {
+  background-color: lightgray;
+  height: 100%;
+}
+
+.btn{
+  width: auto;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: white;
+  align-content: center;
 }
