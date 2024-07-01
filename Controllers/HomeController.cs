@@ -1,4 +1,5 @@
 ﻿using CRMSystem.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,11 +7,11 @@ namespace CRMSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private HomeModel Model { get; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HomeModel model)
         {
-            _logger = logger;
+            Model = model;
         }
 
         public IActionResult Index()
@@ -18,9 +19,10 @@ namespace CRMSystem.Controllers
             return View();
         }
 
-        public IResult SendOrder()
+        public async Task<IActionResult> AddOrder(string name, string email, string message)
         {
-            return Results.Ok();
+            await Model.Add(name, email, message);
+            return Ok("Заявка успешно отправлена");
         }
     }
 }

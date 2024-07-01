@@ -63,8 +63,9 @@ body {
 
 .order-form{
   display: grid;
-  grid-template-columns: 80px 1fr 50px 1fr 80px;
+  grid-template-columns: 200px 1fr 50px 1fr 200px;
   grid-template-rows: 4em 10px 6em 10px 3em;
+  width: auto;
 }
 
 .greeting-for-form{
@@ -78,6 +79,7 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
+  flex-basis: auto;
 }
 
 .input1-wrapper {
@@ -105,9 +107,11 @@ body {
 .label{
   color:gray;
   font-size: small;
+  padding: 5px;
 }
 
-.input {
+.input {  
+  display: block;
   background-color: lightgray;
   height: 100%;
 }

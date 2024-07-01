@@ -4,21 +4,21 @@
 
 <div>
     <p class="greeting-for-form">Оставить заявку или задать вопрос</p>
-    <form action="/Home/SendOrder" method="post" class="order-form">
+    <form action="/Home/AddOrder" method="post" class="order-form">
         <div class="wrapper input1-wrapper">
             <label class="label" for="name">Имя: </label>
             <input class="input" type="text" name="name" id="name" maxlength="50" required />
         </div>
         <div class="wrapper input2-wrapper">
-            <label class="label" for="email" class="label">Email: </label>
+            <label class="label" for="email">Email: </label>
             <input class="input" type="email" name="email" id="email" required />
         </div>
         <div class="wrapper comment-wrapper">
-            <label class="label" for="message" class="label">Текст сообщения: </label>
+            <label class="label" for="message">Текст сообщения: </label>
             <input class="input" type="text" name="message" id="message" maxlength="150" required />
         </div>
         <div class="wrapper btn-wrapper">
-            <input class="btn" type="submit" value="Отправить" />
+            <input class="btn" type="submit" value="Отправить"/>
         </div>
     </form>
 </div>
