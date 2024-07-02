@@ -149,19 +149,28 @@ body {
 
 .container-title{
   color: var(--main-color);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 .separator-line{
   background-color: var(--back-color);
+  width: 100%;
+  height: 5px;
+  margin-bottom: 20px;
 }
 
-.section-content{
+.cards-block{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   flex-basis: auto;
   gap: var(--cards-gap);
+  vertical-align: central;
 }
 
 .project-card {
@@ -183,5 +192,23 @@ body {
   background-color: var(--back-color);
   vertical-align: central;
   margin-bottom: 0px;
+}
+
+.article{
+  color: var(--main-font-color);
+  text-align: justify;
+  padding: 10px;
+}
+
+.logo{
+  width: 100px;
+  height: auto;
+  margin-left: 10px;
+  float: right;
+}
+
+.description-block{
+  width: calc(100% - 110px);
+  height: 100%;
 }
 

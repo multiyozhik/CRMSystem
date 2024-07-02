@@ -4,15 +4,17 @@ namespace CRMSystem.Controllers
 {
     public class ProjectsController : Controller
     {
+        public ProjectsController()
+        { }
+
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
-        public async Task GetProjectDescription()
+        public IActionResult ProjectDescription()
         {
-            Response.ContentType="text/html";
-            await Response.WriteAsync("Project descriprion here");
+            return View("ProjectDescription");
         }
     }
 }
