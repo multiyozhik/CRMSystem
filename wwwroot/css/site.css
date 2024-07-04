@@ -248,4 +248,47 @@ body {
   padding-left: 20px;
 }
 
+/*blog page*/
+.blog-card {
+  width: calc((100% - (var(--blog-cards-in-row) - 1) * var(--cards-gap)) / var(--blog-cards-in-row));
+  height: calc(5/4 * (100% - (var(--blog-cards-in-row) - 1) * var(--cards-gap)) / var(--blog-cards-in-row));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
 
+.blog-card-title{
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.blog-text{
+  font-size: small;
+}
+
+.blog{
+  width: 100%;
+  object-fit: contain;
+}
+
+/*blog article description page*/
+.article-desription-block{
+  display: flex;
+}
+
+.article-block{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 10px;
+}
+
+.btn-back-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-right{
+  margin-left: auto;
+}
