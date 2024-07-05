@@ -292,3 +292,27 @@ body {
 .btn-right{
   margin-left: auto;
 }
+
+/*contacts page*/
+.contacts-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contacts-block {
+  width: 40%;    
+}
+
+.map{
+  width: 100%;
+  object-fit: contain;
+}
+
+.nav-left-bottom {
+  position: relative;
+  justify-content: flex-start;
+  bottom: 10px;
+}
