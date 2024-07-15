@@ -1,0 +1,27 @@
+﻿@using CRMSystem.Authentication
+@model IEnumerable<AppUser>
+
+<main class="container">
+    <h2>Список пользователей</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(AppUser user in Model)     
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PasswordHash</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>

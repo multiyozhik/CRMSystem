@@ -13,6 +13,14 @@
         <div class="header">
             <nav>
                 <ul class="nav">
+                    <li><a href="/Admin/Index">Список пользователей</a></li>
+                    <li><a href="/Admin/Register">Регистрация</a></li>
+                    <li><a href="/Admin/Login">Войти</a></li>
+                    <li><a href="/Admin/Logout">Выйти</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="nav">
                     <li><a href="/Home/Index">Главная</a></li>
                     <li><a href="/Services/Index">Услуги</a></li>
                     <li><a href="/Projects/Index">Проекты</a></li>
@@ -36,6 +44,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
