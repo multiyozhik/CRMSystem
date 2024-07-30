@@ -32,8 +32,13 @@ void ConfigureServices(IServiceCollection services)
         options.User.RequireUniqueEmail = true;
         options.Password.RequiredLength = 5;
         options.Password.RequiredUniqueChars = 1;
-        options.Password.RequireLowercase = true;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
     });
+
+    services.AddAuthentication();
 }
 
 void Configure(IApplicationBuilder app, IWebHostEnvironment environment)

@@ -1,20 +1,20 @@
-﻿@using CRMSystem.Authentication
-@model RegisterModel
+﻿@using CRMSystem.ViewModels
+@model AppUserViewModel
 
 <main class="container">
-    <div>
+    <div asp-validation-summary="All">
         <h2>Введите данные:</h2>
-        <form asp-controller="admin" asp-action="register" method="post">
-            <label asp-for="Login">Логин: </label>
-            <input id="Login" type="text" name="UserName" />
-            <span asp-validation-for="Login"/>
+        <form method="post" asp-controller="Admin" asp-action="CreateAppUser" method="post">
+            <label asp-for="UserName">Имя: </label>
+            <input id="UserName" type="text" name="UserName" />
+            <span asp-validation-for="UserName"/>
             <label asp-for="Password">Пароль: </label>
             <input id="Password" type="password" name="Password"/>
             <span asp-validation-for="Password"/>
             <label asp-for="Email">Email: </label>
             <input id="Email" type="email" name="Email" />  
             <span asp-validation-for="Email"/>
-            <input type="submit" value="Зарегистрироваться"/>
+            <input type="submit" value="Создать"/>
         </form>
     </div>
 </main>
