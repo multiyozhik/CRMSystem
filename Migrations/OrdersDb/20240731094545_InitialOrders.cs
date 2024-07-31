@@ -33,8 +33,8 @@ namespace CRMSystem.Migrations.OrdersDb
                 columns: new[] { "Id", "Name", "Text", "TimeStamp", "email" },
                 values: new object[,]
                 {
-                    { new Guid("3934dc31-17b2-4174-8d0a-be032fb9a602"), "Петров", "Заявка на разработку раздела по пожарной безопасности", new DateTime(2024, 7, 18, 15, 39, 1, 100, DateTimeKind.Local).AddTicks(3172), "Petrov@mail.ru" },
-                    { new Guid("addbbfc7-da09-42b6-a5e4-f1ce1604f58e"), "Иванов", "Заявка на проведение оценки риска", new DateTime(2024, 5, 30, 15, 39, 1, 100, DateTimeKind.Local).AddTicks(3139), "Ivanov@mail.ru" }
+                    { new Guid("095e3e31-739e-4715-9c1b-bcb859b78a13"), "Петров", "Заявка на разработку раздела по пожарной безопасности", new DateTime(2024, 7, 19, 12, 45, 43, 975, DateTimeKind.Local).AddTicks(6565), "Petrov@mail.ru" },
+                    { new Guid("d7e50d81-97af-44b6-9f51-c8b5b3fb0f8a"), "Иванов", "Заявка на проведение оценки риска", new DateTime(2024, 5, 31, 12, 45, 43, 975, DateTimeKind.Local).AddTicks(6535), "Ivanov@mail.ru" }
                 });
         }
 
