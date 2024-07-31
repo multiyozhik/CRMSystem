@@ -32,7 +32,7 @@ namespace CRMSystem.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
+                var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
                 if (user is not null)
                 {
                     await _signInManager.SignOutAsync();

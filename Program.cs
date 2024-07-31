@@ -3,15 +3,17 @@ using CRMSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureServices(builder.Services);
+
 var app = builder.Build();
 Configure(app, app.Environment);
 
 app.MapDefaultControllerRoute();
-app.Run();
 
+app.Run();
 
 void ConfigureServices(IServiceCollection services)
 {
@@ -57,4 +59,38 @@ void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
     app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
+
+    CreateAdminAccount(app, builder.Configuration).Wait(); //добавл. админа
+}
+
+static async Task CreateAdminAccount(IApplicationBuilder app, IConfiguration config)
+{
+    //если var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>(); то ошибка -
+    //Can not resolve scoped service UserManager from root provider => документация по созд. scope =>
+    //https://learn.microsoft.com/en-us/dotnet/core/extensions/scoped-service#rewrite-the-worker-class
+
+    using IServiceScope scope = app.ApplicationServices.CreateScope();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var adminLogin = config["AdminAccountData:Login"] ?? "admin";
+    var adminEmail = config["AdminAccountData:Email"];
+    var adminPassword = config["AdminAccountData:Password"];
+    var adminRole = config["AdminAccountData:Role"] ?? "admin";
+
+    var user = await userManager.FindByNameAsync(adminLogin);
+    if (user is null)
+    {
+        await roleManager.CreateAsync(new IdentityRole(adminRole));
+        var adminUser = new AppUser()
+        {
+            UserName = adminLogin,
+            Email = adminEmail
+        };
+        var result = await userManager.CreateAsync(adminUser, adminPassword);
+        if (result is not null)
+        {
+            await userManager.AddToRoleAsync(adminUser, adminRole);
+        }
+    }
 }

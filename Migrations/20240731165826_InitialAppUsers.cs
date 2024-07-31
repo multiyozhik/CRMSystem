@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace CRMSystem.Migrations
 {
     /// <inheritdoc />
@@ -32,7 +30,6 @@ namespace CRMSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -157,15 +154,6 @@ namespace CRMSystem.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "1", 0, "0eb072eb-43df-4a5d-9658-7cb865c119a0", "AppUser", "User1@mail.ru", false, false, null, null, null, "11111", null, false, "d85f7179-c440-4449-88fb-3bc7ac13909f", false, "User1" },
-                    { "2", 0, "b6a5e8c5-f1ab-443f-b07d-f10f582a6056", "AppUser", "User2@mail.ru", false, false, null, null, null, "22222", null, false, "f5ede03c-b267-48e6-ba87-4550ffc5f46d", false, "User2" }
                 });
 
             migrationBuilder.CreateIndex(
