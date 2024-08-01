@@ -1,6 +1,8 @@
 ﻿using CRMSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
 namespace CRMSystem.Controllers
@@ -14,11 +16,13 @@ namespace CRMSystem.Controllers
             Model = model;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public async Task AddOrder(string name, string email, string message)
         {
             await Model.Add(name, email, message);
@@ -38,7 +42,8 @@ namespace CRMSystem.Controllers
                 </head>
                 <body>
                     <div>Заявка успешно отправлена</div>
-                </body>");
+                </body>
+            </html>");
         }
     }
 }

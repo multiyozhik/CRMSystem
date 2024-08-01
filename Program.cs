@@ -1,9 +1,9 @@
+using Azure.Core;
+using Azure;
 using CRMSystem.Authentication;
 using CRMSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureServices(builder.Services);
@@ -37,7 +37,9 @@ void ConfigureServices(IServiceCollection services)
         options.Password.RequireLowercase = false;
         options.Password.RequireDigit = false;
         options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
+        options.Password.RequireUppercase = false;        
+        options.Lockout.MaxFailedAccessAttempts = 3;
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     });
 
     services.AddAuthentication();

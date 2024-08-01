@@ -28,7 +28,7 @@ namespace CRMSystem.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]        
-        public async Task<IActionResult> LogIn(LoginViewModel loginViewModel, string returnUrl)
+        public async Task<IActionResult> LogIn(LoginViewModel loginViewModel, string returnUrl="/")
         {
             if(ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace CRMSystem.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return View("/Home/Index");
+            return Redirect("/Home/Index");
         }
     }
 }

@@ -1,19 +1,24 @@
 ﻿using CRMSystem.Authentication;
 using CRMSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CRMSystem.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         readonly UserManager<AppUser> userManager;
         readonly IPasswordHasher<AppUser> passwordHasher;
+        readonly IConfiguration config;
 
-        public AdminController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher) 
+        public AdminController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher, IConfiguration config)
         {
             this.userManager = userManager;
             this.passwordHasher = passwordHasher;
+            this.config = config;
         }
 
         [HttpGet]
@@ -33,8 +38,12 @@ namespace CRMSystem.Controllers
                     Email = model.Email
                 };
                 IdentityResult result = await userManager.CreateAsync(newAppUser, model.Password);
-                if (result.Succeeded) 
+                string? adminRole = config["AdminAccountData:Role"];
+                if (result.Succeeded && adminRole is not null && !adminRole.IsNullOrEmpty())
+                {
+                    await userManager.AddToRoleAsync(newAppUser, adminRole);
                     return RedirectToAction("Index");
+                }
                 else 
                     AddErrorToEntityResult(result.Errors);                
             }
