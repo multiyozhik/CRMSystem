@@ -11,13 +11,15 @@
 <body>
     <header>
         <div class="header">
-            <nav>
-                <ul class="nav">
-                    <li><a href="/Admin/Index">Список пользователей</a></li>
-                    <li><a href="/Account/LogIn">Войти</a></li>
-                    <li><a href="/Account/LogOut">Выйти</a></li>
-                </ul>
-            </nav>
+        <nav>
+            <ul class="nav">
+                <li><a href="/Admin/Index">Список пользователей</a></li>
+                <li><a href="/Account/LogIn">Войти</a></li>
+                <li><a href="/Account/LogOut">Выйти</a></li>
+            </ul>
+        </nav>
+        @if(!User.IsInRole("admin"))
+        {
             <nav>
                 <ul class="nav">
                     <li><a href="/Home/Index">Главная</a></li>
@@ -29,11 +31,29 @@
                 </ul>
             </nav>
             <h1 class="slogan">Расширяем возможности</h1>
+        }            
         </div>        
     </header>
 
-    <div>
-        @RenderBody()
+    <div class="main-wrapper">
+        @if (User.IsInRole("admin"))
+        {
+            <aside class="aside">
+                <nav>
+                    <ul>
+                        <li><a href="/Desktop/Index"></a>Рабочий стол</li>
+                        <li><a href="/Home/Index">Главная</a></li>
+                        <li><a href="/Projects/Index">Проекты</a></li>
+                        <li><a href="/Services/Index">Услуги</a></li>
+                        <li><a href="/Blog/Index/">Блог</a></li>
+                        <li><a href="/Contacts/Index">Контакты</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        }
+        <div>
+            @RenderBody()
+        </div>
     </div>
 
     <footer>
