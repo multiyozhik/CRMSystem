@@ -38,10 +38,10 @@
     <div class="main-wrapper">
         @if (User.IsInRole("admin"))
         {
-            <aside class="aside">
+            <aside>
                 <nav>
-                    <ul>
-                        <li><a href="/Desktop/Index"></a>Рабочий стол</li>
+                    <ul class="aside">
+                        <li><a href="/Home/Desktop">Рабочий стол</a></li>
                         <li><a href="/Home/Index">Главная</a></li>
                         <li><a href="/Projects/Index">Проекты</a></li>
                         <li><a href="/Services/Index">Услуги</a></li>

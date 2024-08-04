@@ -9,23 +9,5 @@ namespace CRMSystem.Models
         {
             Database.EnsureCreated();
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Order>().HasData(
-                new Order(
-                        Guid.NewGuid(),
-                        DateTime.Now.AddMonths(-2),
-                        "Иванов",
-                        "Ivanov@mail.ru",
-                        "Заявка на проведение оценки риска"),
-                    new Order(
-                        Guid.NewGuid(),
-                        DateTime.Now.AddDays(-12),
-                        "Петров",
-                        "Petrov@mail.ru",
-                        "Заявка на разработку раздела по пожарной безопасности"));
-        }     
-
     }
 }

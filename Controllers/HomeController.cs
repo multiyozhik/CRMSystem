@@ -23,27 +23,33 @@ namespace CRMSystem.Controllers
         }
 
         [AllowAnonymous]
-        public async Task AddOrder(string name, string email, string message)
+        public async Task<IActionResult> AddOrder(string name, string email, string message)
         {
             await Model.Add(name, email, message);
-            Response.ContentType = "text/html; charset=utf-8";
-            await Response.WriteAsync(@"<!DOCTYPE html>
-            <html>
-                <head>
-                    <title>CRM-System</title>
-                    <meta charset=utf-8/>
-                    <style>
-                        div {
-                            border: 1px solid blue; color:blue; 
-                            font-size: 1.5em; text-align: center;
-                            width: auto; margin: 20px; padding: 10px;
-                        }       
-                    </style>
-                </head>
-                <body>
-                    <div>Заявка успешно отправлена</div>
-                </body>
-            </html>");
+            return View("OrderAdded");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Desktop()
+        {
+            return View(await Model.GetOrdersList());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangeStatus(Guid id)
+        {
+            ViewBag.OrderId = id;
+            return View("ChangeStatus");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatus(OrderStatus status, Guid id)
+        {
+            await Model.UpdateOrderStatus(status, id);
+            return RedirectToAction("Desktop");
         }
     }
 }

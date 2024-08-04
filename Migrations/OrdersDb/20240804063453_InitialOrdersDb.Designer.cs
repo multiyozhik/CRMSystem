@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRMSystem.Migrations.OrdersDb
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240731094545_InitialOrders")]
-    partial class InitialOrders
+    [Migration("20240804063453_InitialOrdersDb")]
+    partial class InitialOrdersDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,16 @@ namespace CRMSystem.Migrations.OrdersDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -42,31 +49,9 @@ namespace CRMSystem.Migrations.OrdersDb
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d7e50d81-97af-44b6-9f51-c8b5b3fb0f8a"),
-                            Name = "Иванов",
-                            Text = "Заявка на проведение оценки риска",
-                            TimeStamp = new DateTime(2024, 5, 31, 12, 45, 43, 975, DateTimeKind.Local).AddTicks(6535),
-                            email = "Ivanov@mail.ru"
-                        },
-                        new
-                        {
-                            Id = new Guid("095e3e31-739e-4715-9c1b-bcb859b78a13"),
-                            Name = "Петров",
-                            Text = "Заявка на разработку раздела по пожарной безопасности",
-                            TimeStamp = new DateTime(2024, 7, 19, 12, 45, 43, 975, DateTimeKind.Local).AddTicks(6565),
-                            email = "Petrov@mail.ru"
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,56 @@
+﻿@model List<Order>
+
+<div class="container colored-container">
+    <main>
+        <nav>
+            <p>
+                Всего @Model.Count заявки.
+            </p>
+            <table class="desktop-table">
+                <thead><tr></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="td-desktop-btn"><a href="#today">Сегодня</a></td>
+                        <td class="td-desktop-btn"><a href="#yesterday">Вчера</a></td>
+                        <td class="td-desktop-btn"><a href="#week">Неделя</a></td>
+                        <td class="td-desktop-btn"><a href="#month">Месяц</a></td>
+                        <td>Период с <form class="date-form"><input type="date" placeholder="Период с" name="date-start" /></form>
+                            по <form class="date-form"><input type="date" placeholder="по" name="date-end" /></form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </nav>
+        <p>
+            За указанный период поступило: @*@Viewbag.OrdersPerPeriodCount *@заявок.
+        </p>
+        <table class="desktop-table">
+            <thead>
+                <tr>
+                    <th>Номер заявки</th>
+                    <th>Время заявки</th>
+                    <th>Имя</th>
+                    <th>Текст заявки</th>
+                    <th>Контакты</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.TimeStamp</td>
+                        <td>@order.Name</td>
+                        <td>@order.Text</td>
+                        <td>@order.Email</td>
+                        <td>@order.Status</td>
+                        <td><a href="/Home/ChangeStatus/@order.Id">Изменить статус</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</div>
+
+
