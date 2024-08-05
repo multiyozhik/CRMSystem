@@ -10,20 +10,31 @@
                 <thead><tr></tr></thead>
                 <tbody>
                     <tr>
-                        <td class="td-desktop-btn"><a href="#today">Сегодня</a></td>
-                        <td class="td-desktop-btn"><a href="#yesterday">Вчера</a></td>
-                        <td class="td-desktop-btn"><a href="#week">Неделя</a></td>
-                        <td class="td-desktop-btn"><a href="#month">Месяц</a></td>
-                        <td>Период с <form class="date-form"><input type="date" placeholder="Период с" name="date-start" /></form>
-                            по <form class="date-form"><input type="date" placeholder="по" name="date-end" /></form>
+                        <td><a asp-controller="Home" asp-action="FilterByPeriod" asp-route-period="today">Сегодня</a></td>
+                        <td><a asp-controller="Home" asp-action="FilterByPeriod" asp-route-period="yesterday">Вчера</a></td>
+                        <td><a asp-controller="Home" asp-action="FilterByPeriod" asp-route-period="week">Неделя</a></td>
+                        <td><a asp-controller="Home" asp-action="FilterByPeriod" asp-route-period="month">Месяц</a></td>
+                        <td>
+                            <form asp-controller="Home" asp-action="FilterByDateRange">
+                                <label>Период с </label><input type="date" name="dateStart" required />
+                                <label>по </label><input type="date" name="dateEnd" required />
+                                <input type="submit" value="Показать"/>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </nav>
-        <p>
-            За указанный период поступило: @*@Viewbag.OrdersPerPeriodCount *@заявок.
-        </p>
+
+        @if(ViewBag.OrdersByPeriodCount is null)
+        {
+            <p>Период выборки заявок не выбран.</p>
+        }
+        else
+        {
+            <p>За указанный период поступило @(ViewBag.OrdersByPeriodCount) заявок.</p>
+        }      
+
         <table class="desktop-table">
             <thead>
                 <tr>

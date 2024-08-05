@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 namespace CRMSystem.Models
 {
     public class HomeModel
@@ -18,9 +17,7 @@ namespace CRMSystem.Models
         }
 
         public async Task<List<Order>> GetOrdersList()
-        {
-            return await context.Orders.ToListAsync();
-        }
+            => await context.Orders.ToListAsync();
 
         public async Task UpdateOrderStatus(OrderStatus status, Guid id)
         {
@@ -33,5 +30,9 @@ namespace CRMSystem.Models
                 context.SaveChanges();
             }
         }
+
+        public async Task<List<Order>> FilterOrdersByDateRange(DateTime dateStart, DateTime dateEnd)
+            => await context.Orders.Where(order => (order.TimeStamp >= dateStart && order.TimeStamp <= dateEnd))
+            .ToListAsync();
     }
 }
