@@ -23,11 +23,11 @@
             <nav>
                 <ul class="nav">
                     <li><a href="/Home/Index">Главная</a></li>
-                    <li><a href="/Services/Index">Услуги</a></li>
-                    <li><a href="/Projects/Index">Проекты</a></li>
-                    <li><a href="/Blog/Index">Блог</a></li>
+                        <li><a href="/Services/Index">@ViewBag.FieldValues.ServiceMenuItemName</a></li>
+                        <li><a href="/Projects/Index">@ViewBag.FieldValues.ProjectMenuItemName</a></li>
+                        <li><a href="/Blog/Index">@ViewBag.FieldValues.BlogMenuItemName</a></li>
                     <li><a href="#"></a></li>
-                    <li><a href="/Contacts/Index">Контакты</a></li>
+                        <li><a href="/Contacts/Index">@ViewBag.FieldValues.ContactsMenuItemName</a></li>
                 </ul>
             </nav>
             <h1 class="slogan">Расширяем возможности</h1>
@@ -43,17 +43,15 @@
                     <ul class="aside">
                         <li><a href="/Home/Desktop">Рабочий стол</a></li>
                         <li><a href="/Home/Index">Главная</a></li>
-                        <li><a href="/Projects/Index">Проекты</a></li>
-                        <li><a href="/Services/Index">Услуги</a></li>
-                        <li><a href="/Blog/Index/">Блог</a></li>
-                        <li><a href="/Contacts/Index">Контакты</a></li>
+                        <li><a href="/Projects/Index">@ViewBag.FieldValues.ProjectMenuItemName</a></li>
+                        <li><a href="/Services/Index">@ViewBag.FieldValues.ServiceMenuItemName</a></li>
+                        <li><a href="/Blog/Index/">@ViewBag.FieldValues.BlogMenuItemName</a></li>
+                        <li><a href="/Contacts/Index">@ViewBag.FieldValues.ContactsMenuItemName</a></li>
                     </ul>
                 </nav>
             </aside>
-        }
-        <div>
             @RenderBody()
-        </div>
+        }
     </div>
 
     <footer>

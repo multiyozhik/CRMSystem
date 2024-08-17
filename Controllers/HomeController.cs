@@ -1,38 +1,44 @@
 ﻿using CRMSystem.Models;
+using CRMSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 
 namespace CRMSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private HomeModel Model { get; }
-
+        
         public HomeController(HomeModel model)
         {
-            Model = model;
+            Model = model;   
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Index() => View();
+        public async Task<IActionResult> Index()
+        {
+            using var fs = new FileStream("defaultFieldValues.json", FileMode.Open);
+            ViewBag.FieldValues = await JsonSerializer.DeserializeAsync<HomePageFieldValuesViewModel>(fs);
+            return View();     //здесь успешно десериализует, загружает Home/Index правильно
+        }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> AddOrder(string name, string email, string message)
         {
             await Model.Add(name, email, message);
             return View("OrderAdded");
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Desktop() => View(await Model.GetOrdersList());
 
-        [Authorize]
         [HttpGet]
         public IActionResult ChangeStatus(Guid id)
         {
@@ -40,7 +46,6 @@ namespace CRMSystem.Controllers
             return View("ChangeStatus");
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangeStatus(OrderStatus status, Guid id)
         {
@@ -48,7 +53,6 @@ namespace CRMSystem.Controllers
             return RedirectToAction("Desktop");
         }
 
-        [Authorize]
         [HttpPost]
         //AddDays(1), чтобы заявки последнего дня входили включительно, т.к. TimeStamp содержит время
         public async Task<IActionResult> FilterByDateRange([FromForm]DateTime dateStart, DateTime dateEnd)
@@ -58,7 +62,6 @@ namespace CRMSystem.Controllers
             return View("Desktop", ordersByPeriod);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> FilterByPeriod([FromQuery]string period)
         {
@@ -76,6 +79,23 @@ namespace CRMSystem.Controllers
                 endDate);
             ViewBag.OrdersByPeriodCount = ordersByPeriod.Count;
             return View("Desktop", ordersByPeriod);
+        }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromForm] HomePageFieldValuesViewModel homeInterfaceVM)
+        {
+            using var fs = new FileStream("defaultFieldValues.json", FileMode.Create);
+            await JsonSerializer.SerializeAsync(fs, homeInterfaceVM, new JsonSerializerOptions{ 
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic)
+            });
+            return RedirectToAction("Index");
         }
     }
 }

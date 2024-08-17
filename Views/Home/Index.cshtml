@@ -1,12 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Главная";
-}
-
+﻿
 <main class="container">
-    <p class="greeting-for-form">Оставить заявку или задать вопрос</p>
+    <p class="text-before-form">@ViewBag.FieldValues.PrecedingFormText</p>
     <form action="/Home/AddOrder" method="post" class="order-form">
         <div class="wrapper input1-wrapper">
-            <label class="label" for="name">Имя: </label>
+            <label class="label" for="name">Имя: </label> 
             <input class="input" type="text" name="name" id="name" maxlength="50" required />
         </div>
         <div class="wrapper input2-wrapper">
@@ -17,8 +14,14 @@
             <label class="label" for="message">Текст сообщения: </label>
             <input class="input" type="text" name="message" id="message" maxlength="150" required />
         </div>
-        <div class="wrapper btn-wrapper">
-            <input class="btn" type="submit" value="Отправить"/>
+        <div class="wrapper btn-wrapper">  
+            <input class="btn" type="submit" value="Отправить" required />
         </div>
     </form>
+    @if(User.IsInRole("admin"))
+    {
+        <div class="edit-wrapper">
+            <a class="btn" href="/Home/Edit">Редактировать</a>
+        </div>
+    }
 </main>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CRMSystem.ViewModels;
+using Microsoft.EntityFrameworkCore;
 namespace CRMSystem.Models
 {
     public class HomeModel

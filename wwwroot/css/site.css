@@ -111,12 +111,12 @@ body {
   margin-top: 0;
 }
 
-.greeting-for-form {
-  text-align: left;
-  font-weight: bold;
-  color: var(--main-color);
-  margin: 30px;
-  margin-left: var(--container-offset);
+.text-before-form {
+    text-align: left;
+    font-weight: bold;
+    color: var(--main-color);
+    margin: 30px;
+    margin-left: var(--container-offset);
 }
 
 .wrapper {
@@ -124,6 +124,8 @@ body {
   flex-direction: column;
   flex-basis: auto;
 }
+
+
 
 .input1-wrapper {
   grid-column: 2 / 3;
@@ -161,12 +163,19 @@ body {
 
 .btn{
   width: auto;
-  padding: 10px;
+  margin: 10px;
+  padding: 5px;
   border-radius: 5px;
   background-color: var(--main-color);
   color: var(--decorate-font-color);
   align-content: center;
 }
+
+.edit-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 
 /*projects page with cards of projects*/
 .container {
@@ -376,5 +385,18 @@ body {
 
 .date {
     display: inline;
+}
+
+.edit-btn {
+    display: inline-block;
+    text-align: right;
+    margin: 10px;
+    margin-right: 100px;
+    padding: 10px;
+    width: auto;
+    border-radius: 5px;
+    background-color: var(--main-color);
+    color: var(--decorate-font-color);
+    align-content: center;
 }
 

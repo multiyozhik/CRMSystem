@@ -1,5 +1,3 @@
-using Azure.Core;
-using Azure;
 using CRMSystem.Authentication;
 using CRMSystem.Models;
 using Microsoft.AspNetCore.Identity;
