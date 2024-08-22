@@ -1,5 +1,6 @@
 using CRMSystem.Authentication;
 using CRMSystem.Models;
+using CRMSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

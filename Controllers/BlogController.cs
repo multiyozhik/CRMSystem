@@ -5,6 +5,9 @@ namespace CRMSystem.Controllers
 {
     public class BlogController : Controller
     {
+        public BlogController()
+        { }
+
         [AllowAnonymous]
         public IActionResult Index()
         {

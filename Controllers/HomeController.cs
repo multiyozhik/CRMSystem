@@ -13,19 +13,17 @@ namespace CRMSystem.Controllers
     public class HomeController : Controller
     {
         private HomeModel Model { get; }
-        
+
         public HomeController(HomeModel model)
         {
-            Model = model;   
+            Model = model;
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            using var fs = new FileStream("defaultFieldValues.json", FileMode.Open);
-            ViewBag.FieldValues = await JsonSerializer.DeserializeAsync<HomePageFieldValuesViewModel>(fs);
-            return View();     //здесь успешно десериализует, загружает Home/Index правильно
+            return View(); 
         }
 
         [AllowAnonymous]
@@ -88,10 +86,11 @@ namespace CRMSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromForm] HomePageFieldValuesViewModel homeInterfaceVM)
+        public async Task<IActionResult> Edit([FromForm] FieldValuesViewModel homeInterfaceVM)
         {
-            using var fs = new FileStream("defaultFieldValues.json", FileMode.Create);
-            await JsonSerializer.SerializeAsync(fs, homeInterfaceVM, new JsonSerializerOptions{ 
+            using var fs = new FileStream("./wwwroot/files/default.json", FileMode.Create);
+            await JsonSerializer.SerializeAsync(fs, homeInterfaceVM, new JsonSerializerOptions
+            {
                 WriteIndented = true,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic)
             });

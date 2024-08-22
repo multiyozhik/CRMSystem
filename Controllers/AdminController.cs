@@ -14,7 +14,10 @@ namespace CRMSystem.Controllers
         readonly IPasswordHasher<AppUser> passwordHasher;
         readonly IConfiguration config;
 
-        public AdminController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher, IConfiguration config)
+        public AdminController(
+            UserManager<AppUser> userManager, 
+            IPasswordHasher<AppUser> passwordHasher, 
+            IConfiguration config)
         {
             this.userManager = userManager;
             this.passwordHasher = passwordHasher;

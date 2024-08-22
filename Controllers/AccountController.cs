@@ -6,12 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRMSystem.Controllers
 {
-    public class AccountController : Controller   //только LogIn-LogOut, Register не предусм., admin созд. польз.
+    public class AccountController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        public AccountController(
-            SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;

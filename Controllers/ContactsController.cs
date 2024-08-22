@@ -5,6 +5,9 @@ namespace CRMSystem.Controllers
 {    
     public class ContactsController : Controller
     {
+        public ContactsController()
+        { }
+
         [AllowAnonymous]
         public IActionResult Index()
         {
