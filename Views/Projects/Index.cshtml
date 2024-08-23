@@ -1,10 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Проекты";
+﻿@using CRMSystem.ViewModels;
+@using System.Text.Json;
+@{
+    using var fs = new FileStream("./wwwroot/files/default.json", FileMode.Open);
+    var FieldValuesVM = JsonSerializer.Deserialize<FieldValuesViewModel>(fs);
+    ViewData["Title"] = FieldValuesVM?.ProjectMenuItemName ?? "Проекты";
 }
 
 <main class="container">
     <div class="container-title">
-        <h2>Проекты</h2>
+        <h2>@ViewData["Title"]</h2>
     </div>
     <div class="separator-line"></div>
     <section class="cards-block">

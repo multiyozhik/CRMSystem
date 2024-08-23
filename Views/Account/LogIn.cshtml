@@ -1,9 +1,12 @@
 ﻿@using CRMSystem.ViewModels
 @model LoginViewModel
+@{
+    ViewData["Title"]="Вход в систему";
+}
 
 <main class="container">
     <div asp-validation-summary="All">
-        <h2>Вход в систему:</h2>
+        <h2>@ViewData["Title"]</h2>
         <form method="post" asp-controller="Account" asp-action="LogIn">
             <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
             <label asp-for="UserName">Имя: </label>
