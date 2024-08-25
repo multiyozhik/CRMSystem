@@ -24,15 +24,16 @@ body {
 }
 
 :root {
-  --container-offset: 100px;
-  --main-color: dodgerblue;
-  --border-color: gray;
-  --back-color: lightgray;
-  --decorate-font-color: white;
-  --main-font-color: #112223;
-  --cards-gap: 10px;
-  --project-cards-in-row: 3;
-  --blog-cards-in-row: 4;
+    --container-offset: 100px;
+    --main-color: dodgerblue;
+    --border-color: gray;
+    --back-color: lightgray;
+    --decorate-font-color: white;
+    --main-font-color: #112223;
+    --cards-gap: 10px;
+    --project-cards-in-row: 3;
+    --blog-cards-in-row: 4;
+    --card-width: calc((100% - (var(--project-cards-in-row) - 1) * var(--cards-gap)) / var(--project-cards-in-row));
 }
 
 /*header*/
@@ -211,41 +212,80 @@ body {
   margin-bottom: 20px;
 }
 
-.cards-block{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  flex-basis: auto;
-  gap: var(--cards-gap);
+.cards-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: auto; /*размер дочер. эл-та будет уст. автоматически по с-ву width*/
+    justify-content: stretch; /*дочер.эл-ты идут слева направо и карточки ДОЛЖНЫ приобрет. одинак. высоту*/
+    align-items: stretch;
+}
+
+.card-container {
+    width: var(--card-width);
+    /*height: calc(var(--card-width) * 2 / 3);*/  /*ДОЛЖНА БЫТЬ ОДИНАКОВАЯ ВЫСОТА, но не работает*/
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--cards-gap);
+}
+
+.card-container:nth-child(3n) {
+    margin-right: 0;
 }
 
 .project-card {
-  width: calc((100% - (var(--project-cards-in-row) - 1) * var(--cards-gap)) / var(--project-cards-in-row));
-  height: auto;
-  border: 1px solid var(--border-color);
-  text-align: center;
+    display: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--border-color);
 }
 
 .project-img {
-  height: calc(100% - 3em);
-  width: 100%;
+    object-fit: contain;
 }
 
 .project-title {
-  padding: 10px;
-  color: var(--main-font-color);
-  background-color: var(--back-color);
-  vertical-align: central;
-  margin-bottom: 0px;
+    display: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    color: var(--main-font-color);
+    background-color: var(--back-color);
+    margin-bottom: 0px;
+    text-align: center;
+    vertical-align: central;
+}
+
+.project-title p {
+    text-align: center;
+    vertical-align: central;
+}
+
+.icons-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 5px 0px;
+}
+
+.icon-btn {
+    height: 2em;
+    width: 2em;
+    background-size: cover;
+}
+
+.delete-icon-btn {
+    border: none;
+    background: none;
 }
 
 
 /*project description page*/
-.article{
-  color: var(--main-font-color);
-  text-align: justify;
-  padding: 10px;
+.article {
+    color: var(--main-font-color);
+    text-align: justify;
+    padding: 10px;
 }
 
 .container-title .logo {

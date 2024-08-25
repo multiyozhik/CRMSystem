@@ -4,7 +4,9 @@
     using var fs = new FileStream("./wwwroot/files/default.json", FileMode.Open);
     var FieldValuesVM = JsonSerializer.Deserialize<FieldValuesViewModel>(fs);
     ViewData["Title"] = FieldValuesVM?.ProjectMenuItemName ?? "Проекты";
+    var isInRole = User.IsInRole("admin");
 }
+@model IEnumerable<Project>
 
 <main class="container">
     <div class="container-title">
@@ -12,25 +14,36 @@
     </div>
     <div class="separator-line"></div>
     <section class="cards-block">
-        <article class="project-card">            
-            <img class="project-img" src="../img/card1.png" alt="project card1"/>
-            <a href="ProjectDescription" target="_self">           
-                <p class="project-title">Обработка кредитных заявок</p>
-            </a>
-        </article>
-        <article class="project-card">
-            <img class="project-img" src="../img/card2.png" alt="project card2"/>
-            <a href="ProjectDescription" target="_self">
-                <p class="project-title">Управление кадрами</p>
-            </a>
-        </article>
-        <article class="project-card">
-            <img class="project-img" src="../img/card3.png" alt="project card3"/>
-            <a href="ProjectDescription" target="_self">
-                <p class="project-title">Доработка CRM</p>
-            </a>
-        </article>
+        @foreach(var project in Model)
+        {
+            <div class="card-container">
+                <article class="project-card">
+                    <img class="project-img" src="../img/@project.Photo" alt="project card" />
+                    <a class="project-title" href="ProjectDescription" target="_self">
+                        <p>@project.Name</p>
+                    </a>
+                </article>
+                @if (isInRole)
+                {
+                    <div>
+                        <form class="icons-block" method="post" asp-controller="Projects" asp-action="Delete" asp-route-id="@project.Id">
+                            <a class="icon-btn" href="/Projects/Update/@project.Id">
+                                <img src="~/img/icon-edit-btn.png" alt="edit button"/>
+                            </a>
+                            <input class="icon-btn delete-icon-btn" type="image" alt="delete button"
+                                   src="~/img/icon-delete-btn.png" />
+                        </form>
+                    </div>
+                }
+            </div>
+        }
     </section>
+    @if (isInRole)
+    {
+        <div class="edit-wrapper">
+            <a class="btn" href="/Projects/Add">Добавить проект</a>
+        </div>
+    }
 </main>
 
 
