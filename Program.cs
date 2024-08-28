@@ -19,6 +19,8 @@ void ConfigureServices(IServiceCollection services)
     services.AddControllersWithViews();
     services.AddTransient<HomeModel>();     //TODO: в appsetings.json ConnectionStr через User ID, Password
     services.AddTransient<ProjectsModel>();
+    services.AddTransient<ServicesModel>();
+    services.AddTransient<BlogsModel>();
 
     services.AddDbContext<OrdersDbContext>(options => options
         .UseSqlServer(builder.Configuration.GetConnectionString("OrdersConnectionString")));

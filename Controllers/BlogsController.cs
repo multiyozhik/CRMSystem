@@ -1,30 +1,31 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CRMSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CRMSystem.Models;
+using System.Reflection.Metadata;
 
 namespace CRMSystem.Controllers
 {
     [Authorize]
-    public class ProjectsController : Controller
+    public class BlogsController : Controller
     {
-        private readonly ProjectsModel model;
-        public ProjectsController(ProjectsModel projectsModel)
+        private readonly BlogsModel model;        
+        public BlogsController(BlogsModel blogsModel)
         {
-            model = projectsModel;
+            model = blogsModel;
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await model.GetProjectsList());
+            return View(await model.GetBlogsList());
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult ProjectDescription()
+        public IActionResult ArticleDescription()
         {
-            return View("ProjectDescription");
+            return View();
         }
 
         [HttpGet]
@@ -43,17 +44,16 @@ namespace CRMSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var project = await model.GetProjectById(id);
-            return View(project);
+            var blog = await model.GetBlogById(id);
+            return View(blog);
         }
 
-        [HttpPost]   //здесь конфликт id
-        public async Task<IActionResult> Update([FromForm] Project project)
+        [HttpPost]  
+        public async Task<IActionResult> Update([FromForm] Blog blog)
         {
-            await model.Update(project);
+            await model.Update(blog);
             return RedirectToAction("Index");
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
