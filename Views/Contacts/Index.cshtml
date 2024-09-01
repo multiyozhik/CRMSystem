@@ -4,6 +4,11 @@
     using var fs = new FileStream("./wwwroot/files/default.json", FileMode.Open);
     var FieldValuesVM = JsonSerializer.Deserialize<FieldValuesViewModel>(fs);
     ViewData["Title"] = FieldValuesVM?.ContactsMenuItemName ?? "Контакты";
+
+    using var linksStream = new FileStream("./wwwroot/files/social-media-links.json", FileMode.Open);
+    var linksDict = JsonSerializer.Deserialize<Dictionary<string, string>>(linksStream);
+
+    var isInRole = User.IsInRole("admin");
 }
 
 <main class="container">
@@ -27,22 +32,22 @@
                 <p>ФИО директора</p>
             </div>
             <nav class="nav nav-left-bottom">
-                <a href="https://telegram.org/" target="_blank">
-                    <img src="/img/icons8-телеграмма-app.svg" alt="Telegramm Icon">
-                </a>
-                <a href="https://www.whatsapp.com" target="_blank">
-                    <img src="/img/icons8-whatsapp.svg" alt="WhatsApp Icon">
-                </a>
-                <a href="https://www.youtube.com" target="_blank">
-                    <img src="/img/icons8-youtube.svg" alt="YouTube Icon">
-                </a>
-                <a href="https://www.vk.com" target="_blank">
-                    <img src="/img/icons8-логотип-вконтакте.svg" alt="Вконтакте Icon">
-                </a>
+                @foreach (var link in linksDict)
+                {
+                    <a href=@link.Value target="_blank">
+                        <img src=@link.Key alt="logo">
+                    </a>
+                }
             </nav>
         </div>
         <div>
             <img class="map" src="/img/map.png" alt="map"/>
         </div>
     </section>
+    @if (isInRole)
+    {
+        <div class="edit-wrapper">
+            <a class="btn" href="/Contacts/Edit">Редактировать ссылки</a>
+        </div>
+    }
 </main>
