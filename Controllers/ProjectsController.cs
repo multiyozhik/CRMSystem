@@ -22,9 +22,9 @@ namespace CRMSystem.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult ProjectDescription()
+        public async Task<IActionResult> ProjectDescription(Guid id)
         {
-            return View("ProjectDescription");
+            return View(await model.GetProjectById(id));
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace CRMSystem.Controllers
             return View(project);
         }
 
-        [HttpPost]   //здесь конфликт id
+        [HttpPost]
         public async Task<IActionResult> Update([FromForm] Project project)
         {
             await model.Update(project);

@@ -5,21 +5,21 @@
     var FieldValuesVM = JsonSerializer.Deserialize<FieldValuesViewModel>(fs);
     ViewData["Title"] = FieldValuesVM?.ProjectMenuItemName ?? "Проекты";
 }
+@model Project
 
 <main class="container">
     <div class="container-title">
         <div>
-            <h2>Обработка кредитных заявок</h2>
+            <h2>@Model.Name</h2>
         </div>
         <div>
-            <img class="container-title logo" src="../img/card1.png" alt="project card1" />
+            <img class="container-title logo" src="../img/@Model.Photo" alt="project card" />
         </div>
     </div>    
     <div class="separator-line"></div>
     <section class="description-block">
         <article class="article">
-            Article text is here Article text is here Article text is hereArticle text is hereArticle text is here
-            Article text is hereArticle text is hereArticle text is hereArticle text
+            @Model.Description
         </article>
     </section>
 </main>

@@ -1,6 +1,5 @@
 using CRMSystem.Authentication;
 using CRMSystem.Models;
-using CRMSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +9,7 @@ ConfigureServices(builder.Services);
 var app = builder.Build();
 Configure(app, app.Environment);
 
+app.MapControllers();
 app.MapDefaultControllerRoute();
 
 app.Run();
@@ -44,13 +44,19 @@ void ConfigureServices(IServiceCollection services)
         options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     });
 
+    services.AddSwaggerGen(options => {});
     services.AddAuthentication();
+    
 }
 
 void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
 {
     if (environment.IsDevelopment())
+    {
         app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    } 
     else
     {
         app.UseExceptionHandler("/Home/Error");
