@@ -7,6 +7,7 @@ namespace CRMSystem.Api
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class ApiProjectsController : ControllerBase
     {
         private readonly ProjectsModel model;
@@ -17,24 +18,24 @@ namespace CRMSystem.Api
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<Project>> ProjectsList()
+        public async Task<List<Project>> GetProjects()
             => await model.GetProjectsList();
 
         [HttpPost]
         public async Task Add([FromBody] ProjectDataFromRequest projectData)
             => await model.Add(projectData.Name, projectData.Description, projectData.Photo);
 
-        [HttpGet]
-        public async Task<Project> Description(Guid id)
+        [HttpGet("{id}")]
+        public async Task<Project> GetProjectById([FromRoute] Guid id)
             => await model.GetProjectById(id);
 
-        [HttpPost]
+        [HttpPut]
         public async Task Update([FromBody] Project project)
             => await model.Update(project);
 
 
-        [HttpPost]
-        public async Task Delete(Guid id)
+        [HttpPost("{id}")]
+        public async Task Delete([FromRoute] Guid id)
             => await model.Delete(id);
     }
 

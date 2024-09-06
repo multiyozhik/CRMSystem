@@ -17,7 +17,7 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     services.AddControllersWithViews();
-    services.AddTransient<HomeModel>();     //TODO: в appsetings.json ConnectionStr через User ID, Password
+    services.AddTransient<HomeModel>();     
     services.AddTransient<ProjectsModel>();
     services.AddTransient<ServicesModel>();
     services.AddTransient<BlogsModel>();
@@ -70,7 +70,7 @@ void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
     app.UseAuthentication();
     app.UseAuthorization();
 
-    CreateAdminAccount(app, builder.Configuration).Wait(); //добавл. админа
+    CreateAdminAccount(app, builder.Configuration).Wait(); 
 }
 
 static async Task CreateAdminAccount(IApplicationBuilder app, IConfiguration config)

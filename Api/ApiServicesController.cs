@@ -7,6 +7,7 @@ namespace CRMSystem.Api
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class ApiServicesController : ControllerBase
     {
         private readonly ServicesModel model;
@@ -17,23 +18,23 @@ namespace CRMSystem.Api
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<Service>> ServicesList()
+        public async Task<List<Service>> GetServices()
             => await model.GetServicesList();
 
         [HttpPost]
-        public async Task Add(ServiceDataFromRequest serviceData)
+        public async Task Add([FromBody] ServiceDataFromRequest serviceData)
         => await model.Add(serviceData.Name, serviceData.Description);
 
-        [HttpGet]
-        public async Task<Service> GetServiceById(Guid id)
+        [HttpGet("{id}")]
+        public async Task<Service?> GetServiceById([FromRoute] Guid id)
         => await model.GetServiceById(id);
 
-        [HttpPost]
-        public async Task Update(Service service)
+        [HttpPut]
+        public async Task Update([FromBody] Service service)
         => await model.Update(service);
 
-        [HttpPost]
-        public async Task Delete(Guid id)
+        [HttpPost("{id}")]
+        public async Task Delete([FromRoute] Guid id)
         => await model.Delete(id);
     }
     public record ServiceDataFromRequest(string Name, string Description);

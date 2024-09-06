@@ -19,9 +19,8 @@ namespace CRMSystem.Api
         }
 
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> LogIn([FromBody] LoginViewModel loginViewModel)
+        public async Task<StatusCodeResult> LogIn([FromBody] LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -30,16 +29,18 @@ namespace CRMSystem.Api
                 {
                     await _signInManager.SignOutAsync();
                     var result = await _signInManager.PasswordSignInAsync(
-                        user, loginViewModel.Password, false, false);
-                    if (!result.Succeeded)
-                        return new StatusCodeResult(401);
+                        user, loginViewModel.Password, false, false);                    
+                    if (result.Succeeded)
+                        return new StatusCodeResult(200);
+                    return new StatusCodeResult(400);
                 }
+                return new StatusCodeResult(401);
             }
-            return new StatusCodeResult(401);
+            return new StatusCodeResult(400);             
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpGet, ValidateAntiForgeryToken]
         public async Task LogOut()
         {
             await _signInManager.SignOutAsync();

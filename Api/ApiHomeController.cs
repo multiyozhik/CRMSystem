@@ -6,7 +6,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace CRMSystem.Api
+namespace CRMSystem.Api         //https://localhost:<port>/swagger/index.html
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
@@ -20,6 +20,12 @@ namespace CRMSystem.Api
         }
 
         [AllowAnonymous]
+        [HttpGet]
+        public async Task<List<Order>> GetOrders()
+            => await Model.GetOrdersList();
+
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<StatusCodeResult> AddOrder([FromBody] OrderDataFromRequest orderData)
         {
@@ -27,13 +33,8 @@ namespace CRMSystem.Api
             return StatusCode(200);
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<List<Order>> OrdersList() 
-            => await Model.GetOrdersList();
-
-        [HttpPost]
-        public async Task ChangeStatus([FromBody] OrderStatus status, Guid id)
+        [HttpPost("{id}")]
+        public async Task ChangeStatus([FromBody] OrderStatus status, [FromRoute] Guid id)
         {
             await Model.UpdateOrderStatus(status, id);
         }
@@ -44,8 +45,8 @@ namespace CRMSystem.Api
                 dateRangeFromRequest.DateStart, 
                 dateRangeFromRequest.DateEnd.AddDays(1));
 
-        [HttpGet]
-        public async Task<List<Order>> FilterByPeriod(string period)
+        [HttpGet("{period}")]
+        public async Task<List<Order>> FilterByPeriod([FromRoute] string period)
         {
             var endDate = period == "yesterday" ? DateTime.Today : DateTime.Today.AddDays(1);
             return await Model.FilterOrdersByDateRange(
@@ -60,7 +61,7 @@ namespace CRMSystem.Api
                 endDate);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task Edit([FromBody] FieldValuesViewModel homeInterfaceVM)
         {
             using var fs = new FileStream("./wwwroot/files/default.json", FileMode.Create);

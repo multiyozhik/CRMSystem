@@ -18,26 +18,26 @@ namespace CRMSystem.Api
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<Blog>> BlogsList()
+        public async Task<List<Blog>> GetBlogs()
             => await model.GetBlogsList();
 
+        [HttpGet("{id}")]
+        public async Task<Blog> GetBlogById([FromRoute] Guid id)
+            => await model.GetBlogById(id);
+
         [HttpPost]
-        public async Task<StatusCodeResult> Add(ArticleDataFromRequest articleData)
+        public async Task<StatusCodeResult> Add([FromBody] ArticleDataFromRequest articleData)
         {
             await model.Add(articleData.Name, articleData.Description, articleData.Photo);
             return StatusCode(200);
         }
 
-        [HttpGet]
-        public async Task<Blog> GetBlogById(Guid id)
-            => await model.GetBlogById(id);
-
-        [HttpPost]
-        public async Task Update(Blog blog)
+        [HttpPut]
+        public async Task Update([FromBody] Blog blog)
             => await model.Update(blog);
 
-        [HttpPost]
-        public async Task Delete(Guid id)
+        [HttpPost("{id}")]
+        public async Task Delete([FromRoute] Guid id)
         => await model.Delete(id);
     }
 

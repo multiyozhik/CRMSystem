@@ -10,7 +10,6 @@ namespace CRMSystem.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        //public DbSet<ContactLink> ContactLinks { get; set; }
         public OrdersDbContext(DbContextOptions<OrdersDbContext> options): base(options)
         {
             Database.EnsureCreated();            
@@ -60,22 +59,6 @@ namespace CRMSystem.Models
                     "Описание блога 4",
                     "blog-4.png",
                     new DateTime(2024, 08, 19)));
-            //modelBuilder.Entity<ContactLink>().HasData(new ContactLink(
-            //        Guid.Parse("918d899e-b5b2-4df6-9caa-1dc82d0356f5"), 
-            //        "https://telegram.org/", 
-            //        "/img/icons8-телеграмма-app.svg"),
-            //        new ContactLink(
-            //        Guid.Parse("fb91d82f-709b-4a2f-b019-e78efcf78960"),
-            //        "https://www.whatsapp.com",
-            //        "/img/icons8-whatsapp.svg"),
-            //        new ContactLink(
-            //        Guid.Parse("c865cb8d-1c7d-4eab-a7f2-75a2b6efde64"),
-            //        "https://www.youtube.com",
-            //        "/img/icons8-youtube.svg"),
-            //        new ContactLink(
-            //        Guid.Parse("075a465f-97da-44b4-9dde-854ab815d194"),
-            //        "https://www.vk.com",
-            //        "/img/icons8-логотип-вконтакте.svg"));
         }
     }
 }

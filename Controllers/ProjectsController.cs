@@ -22,7 +22,7 @@ namespace CRMSystem.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> ProjectDescription(Guid id)
+        public async Task<IActionResult> GetProjectById(Guid id)
         {
             return View(await model.GetProjectById(id));
         }

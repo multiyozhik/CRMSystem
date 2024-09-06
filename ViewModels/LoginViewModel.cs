@@ -7,11 +7,11 @@ namespace CRMSystem.ViewModels
         [Required(ErrorMessage = "Недопустимое имя")]
         public string? UserName { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        //[DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Некорректный email")]
         public string? Email { get; set; }
 
-        [DataType(DataType.Password)]
+        //[DataType(DataType.Password)]
         [Required(ErrorMessage = "Некорректный пароль")]
         public string? Password { get; set; }
     }
